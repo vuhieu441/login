@@ -1,50 +1,44 @@
-.App {
-  text-align: center;
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #637d63;
   
 }
 
-.App-header {
-  background-color: black;
-  min-height: 100vh;
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+.form {
+  max-width: 330px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  background: white;
+  padding: 20px;
+  margin-top: 30px;
 }
-.App .App-header form{
-  background-color: gray;
-  border-radius: 20%;
-  width: 450px;
-  height: 250px;
+
+.form .form__custom-button {
+  margin-top: 50px;
 }
-.App .App-header .info input{
-  border-radius: 8px;
-  margin-left: 8px;
-  margin-top: -5px;
-  font-size: 20px;
-}
-.App .App-header button{
-  margin-right: 50px;
-  border-radius: 7px;
-  font-size: 15px;
-}
-.App .App-header button:hover{
-  background-color: olivedrab;
-  font-size: 15px;
-}
-.App .App-header .nav a{
+.form .link{
   text-decoration: none;
-  font-size: 14px;
-  color: white;
-  margin-left: 90px;
+  margin-top: 10px;
 }
-.App .App-header .nav a:hover{
-  font-size: 18px;
-  color: olivedrab;
+.form .link:hover{
+  font-size: 17px;
+  color: greenyellow;
 }
 
-
-
-
+.app{
+  background-image: url('./background.jpg');
+  height: 800px;
+}
+.app h2{
+  color: orangered;
+}
