@@ -27,7 +27,7 @@ export function Profile ({ userData, fetchUsers }) {
       .then(result => console.log(result)) 
       .catch(error => console.log('error', error));
     localStorage.removeItem("token")
-    
+    window.location.reload()
   }
   return userData.loading ? (
     <h2>Loading</h2>
@@ -40,6 +40,7 @@ export function Profile ({ userData, fetchUsers }) {
           userData.users &&
           userData.users.name}</h2>
         <Button type="button" color="primary" onClick={Logout}>Log Out</Button>
+        
       </div>
       
     </div>

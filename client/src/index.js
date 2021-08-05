@@ -6,10 +6,33 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import store from './redux/store';
+import { SnackbarProvider } from 'notistack';
+import { Zoom } from '@material-ui/core';
+const styles = {
+  success: { backgroundColor: 'purple' },
+  error: { backgroundColor: 'blue' },
+  warning: { backgroundColor: 'green' },
+  info: { backgroundColor: 'yellow' },
+};
+const classes = styles;
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
-      <App />
+      <SnackbarProvider maxSnack={3}
+         classes={{
+          variantSuccess: classes.success,
+          variantError: classes.error,
+          variantWarning: classes.warning,
+          variantInfo: classes.info,
+      }}
+      anchorOrigin={{
+        vertical: 'top',
+        horizontal: 'right',
+    }}
+    TransitionComponent={Zoom}
+      >
+        <App />
+      </SnackbarProvider>
     </BrowserRouter>
   </Provider>  
   ,

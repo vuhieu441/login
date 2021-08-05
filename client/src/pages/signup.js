@@ -3,6 +3,7 @@ import '../App.css';
 import { Link } from 'react-router-dom';
 import CustomInput from "../components/CustomInput";
 import Button from "../components/Button";
+import { withSnackbar } from 'notistack';
 class Signup extends Component {
     constructor (props) {
         super(props);
@@ -23,7 +24,7 @@ class Signup extends Component {
           "name": this.state.name,
           "email": this.state.email,
           "password": this.state.password,
-          "cpassword": this.state.password
+          "cpassword": this.state.cpassword
         });
         var requestOptions = {
           method: 'POST',
@@ -31,23 +32,32 @@ class Signup extends Component {
           body: raw,
           redirect: 'follow'
         };
-        fetch("http://localhost:5000/users", requestOptions)
-        .then(response => {
-          console.log(response)
-          if(response.ok){
-            return response.json()
-          }
-          throw Error(response.status)
-        })
-        .then(result => {
-          console.log(result)
-          alert(" Signup success")
-        })
-        .catch(error =>{ 
-          console.log('error', error)
-          alert("UserName , PassWord Wrong")
-        });
+        var password = this.state.password;
+        var cpassword = this.state.cpassword;
+        if(password === cpassword){
+          return fetch("http://localhost:5000/users", requestOptions)
+          .then(response => {
+            console.log(response)
+            if(response.ok){
+              return response.json()
+            }
+            throw Error(response.status)
+          })
+          .then(result => {
+            console.log(result)
+            this.props.enqueueSnackbar('Sign up success.',{variant: 'success',})
+          })
+          .catch(error =>{ 
+            console.log('error', error)
+            this.props.enqueueSnackbar('Sign up failed.',{variant: 'error',})
+          });
+        }
+        else{
+          this.props.enqueueSnackbar('Password is not the same !',{variant: 'error',})
+        }
+        
       }
+      
   render() {
     return (
       <div className="App">
@@ -99,4 +109,4 @@ class Signup extends Component {
     );
   }
 } 
-export default Signup;
+export default withSnackbar(Signup);

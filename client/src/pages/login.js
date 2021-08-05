@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import Profile  from './profile';
 import CustomInput from "../components/CustomInput";
 import Button from "../components/Button";
+import { withSnackbar } from "notistack";
 class Login extends Component {
   constructor(props){
     super(props);
@@ -39,12 +40,13 @@ class Login extends Component {
       })
       .then(result => {
         console.log(result)
+        this.props.enqueueSnackbar('Logged in successfully.',{variant: 'success',})
         localStorage.setItem("token", result.token)
         this.setState({isLogin: true})
       })
       .catch(error =>{ 
         console.log('error', error)
-        alert("UserName , PassWord Wrong")
+        this.props.enqueueSnackbar('Username or password incorrect.',{variant: 'error',})
       });
   }
   onLogoutSuccess = ()=>{
@@ -80,11 +82,11 @@ class Login extends Component {
             </Button>
             <Link className="link" to='/signup'>
               Create a new account !
-            </Link>        
+            </Link>          
           </form>
   }
       </div>    
     );
   }
 } 
-export default Login;
+export default withSnackbar(Login);
